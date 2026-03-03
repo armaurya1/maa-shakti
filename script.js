@@ -131,6 +131,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     startSlideShow();
 
+    // Touch / swipe support for hero slider
+    const heroEl = document.querySelector('.hero');
+    if (heroEl) {
+        let hStartX = 0;
+        heroEl.addEventListener('touchstart', e => { hStartX = e.touches[0].clientX; }, { passive: true });
+        heroEl.addEventListener('touchend', e => {
+            const diff = hStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                stopSlideShow();
+                diff > 0 ? nextSlide() : prevSlide();
+                startSlideShow();
+            }
+        }, { passive: true });
+    }
+
     // Controls
     nextBtn.addEventListener('click', () => {
         stopSlideShow();
@@ -228,13 +243,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateTestimonialSlider() {
         const testimonialsPerView = getTestimonialsPerView();
-        const cardWidth = testimonialCards[0].offsetWidth + 30; // width + gap
+        // Use track width ÷ perView to get accurate card slot width
+        const trackWidth = testimonialTrack.parentElement.offsetWidth;
+        const cardSlotWidth = trackWidth / testimonialsPerView;
         const maxSlide = testimonialCount - testimonialsPerView;
         
         if (currentTestimonial > maxSlide) currentTestimonial = maxSlide;
         if (currentTestimonial < 0) currentTestimonial = 0;
         
-        testimonialTrack.style.transform = `translateX(-${currentTestimonial * cardWidth}px)`;
+        testimonialTrack.style.transform = `translateX(-${currentTestimonial * cardSlotWidth}px)`;
     }
 
     testimonialNextBtn.addEventListener('click', () => {
@@ -253,6 +270,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     window.addEventListener('resize', updateTestimonialSlider);
+
+    // Touch / swipe support for testimonial slider
+    let tStartX = 0;
+    testimonialTrack.addEventListener('touchstart', e => { tStartX = e.touches[0].clientX; }, { passive: true });
+    testimonialTrack.addEventListener('touchend', e => {
+        const diff = tStartX - e.changedTouches[0].clientX;
+        const maxSlide = testimonialCount - getTestimonialsPerView();
+        if (Math.abs(diff) > 50) {
+            if (diff > 0 && currentTestimonial < maxSlide) { currentTestimonial++; }
+            else if (diff < 0 && currentTestimonial > 0) { currentTestimonial--; }
+            updateTestimonialSlider();
+        }
+    }, { passive: true });
 
     // =========================================
     // FAQ ACCORDION
@@ -524,15 +554,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // =========================================
-    // PARALLAX EFFECT (SUBTLE)
+    // PARALLAX EFFECT (DESKTOP ONLY)
     // =========================================
-    window.addEventListener('scroll', function() {
+    const heroParallaxEl = document.querySelector('.hero-content');
+    function handleParallax() {
+        if (window.innerWidth <= 768) {
+            // Reset any applied styles on mobile
+            if (heroParallaxEl) {
+                heroParallaxEl.style.transform = '';
+                heroParallaxEl.style.opacity = '';
+            }
+            return;
+        }
         const scrolled = window.pageYOffset;
-        const heroContent = document.querySelector('.hero-content');
-        
-        if (heroContent && scrolled < window.innerHeight) {
-            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            heroContent.style.opacity = 1 - (scrolled / window.innerHeight);
+        if (heroParallaxEl && scrolled < window.innerHeight) {
+            heroParallaxEl.style.transform = `translateY(${scrolled * 0.25}px)`;
+            heroParallaxEl.style.opacity = 1 - (scrolled / window.innerHeight) * 1.4;
+        }
+    }
+    window.addEventListener('scroll', handleParallax, { passive: true });
+    window.addEventListener('resize', function() {
+        if (window.innerWidth <= 768 && heroParallaxEl) {
+            heroParallaxEl.style.transform = '';
+            heroParallaxEl.style.opacity = '';
         }
     });
 
