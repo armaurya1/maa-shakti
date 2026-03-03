@@ -49,30 +49,44 @@ A beautiful, fully-featured hospital website with modern design and interactive 
 
 This repository is configured for automatic deployment to InfinityFree hosting using GitHub Actions.
 
-#### Initial Setup:
+#### Initial Setup (Automated - One Command):
 
-1. **Create GitHub Repository:**
-   ```bash
-   cd "c:\Users\Akhil\Desktop\maa shakti hospital"
-   git init
-   git add .
-   git commit -m "Initial commit: Maa Shakti Hospital website"
-   git branch -M main
+**Option 1: Fully Automated Setup (Recommended)**
+
+Simply run the setup script:
+
+```powershell
+.\setup-github.bat
+```
+
+This will:
+- ✅ Install GitHub CLI if not present
+- ✅ Authenticate with GitHub
+- ✅ Create the repository automatically
+- ✅ Push all code to GitHub
+
+**Option 2: Manual Setup**
+
+If you prefer manual setup:
+
+1. **Install GitHub CLI:**
+   ```powershell
+   winget install --id GitHub.cli
+   ```
+   Then close and reopen your terminal.
+
+2. **Authenticate with GitHub:**
+   ```powershell
+   gh auth login
+   ```
+   Follow the prompts to authenticate.
+
+3. **Run the PowerShell automation script:**
+   ```powershell
+   .\setup-github.ps1
    ```
 
-2. **Create a new repository on GitHub:**
-   - Go to https://github.com/new
-   - Name it (e.g., `maa-shakti-hospital`)
-   - Don't initialize with README (we already have one)
-   - Click "Create repository"
-
-3. **Push to GitHub:**
-   ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/maa-shakti-hospital.git
-   git push -u origin main
-   ```
-
-4. **Configure GitHub Secrets:**
+4. **Configure GitHub Secrets (Required):**
    - Go to your repository on GitHub
    - Click **Settings** → **Secrets and variables** → **Actions**
    - Click **New repository secret** and add these three secrets:
