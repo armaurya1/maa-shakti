@@ -81,45 +81,52 @@ ul {
 /* =============================================
    PRELOADER
    ============================================= */
+/* Minimal preloader: small centered spinner to avoid blocking UX */
 #preloader {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-primary);
+    inset: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.75);
     z-index: 10000;
-    transition: opacity 0.5s, visibility 0.5s;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
 }
 
 #preloader.hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .loader {
-    text-align: center;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
-.loader i {
-    font-size: 60px;
-    animation: heartbeat 1s infinite;
+/* simple spinner */
+.loader .spinner {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 4px solid rgba(0,0,0,0.08);
+    border-top-color: var(--primary-color);
+    animation: spin 0.8s linear infinite;
 }
 
 .loader p {
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: 500;
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-dark);
+    font-weight: 600;
+    opacity: 0.9;
 }
 
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* =============================================
    TOP BAR

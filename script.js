@@ -4,15 +4,20 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // =========================================
-    // PRELOADER
+    // PRELOADER (minimal & fast)
     // =========================================
     const preloader = document.getElementById('preloader');
-    
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            preloader.classList.add('hidden');
-        }, 1000);
-    });
+
+    // Hide the preloader very quickly to avoid blocking UX.
+    // Use DOMContentLoaded + tiny delay so pages without heavy assets show immediately.
+    setTimeout(function() {
+        if (!preloader) return;
+        preloader.classList.add('hidden');
+        // remove from DOM after transition to free rendering
+        preloader.addEventListener('transitionend', () => {
+            try { preloader.remove(); } catch(e) {}
+        }, { once: true });
+    }, 120);
 
     // =========================================
     // MOBILE NAVIGATION
