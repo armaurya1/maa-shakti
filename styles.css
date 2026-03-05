@@ -1678,13 +1678,20 @@ ul {
 .footer-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
     margin-bottom: 20px;
 }
 
-.footer-logo i {
-    font-size: 45px;
-    color: var(--primary-color);
+.footer-logo-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    /* invert to white so it looks good on dark footer */
+    filter: brightness(0) invert(1);
+    transition: opacity 0.25s ease;
+}
+
+.footer-logo-img:hover {
+    opacity: 0.85;
 }
 
 .footer-logo h2 {
@@ -2139,6 +2146,7 @@ a, button {
     .footer-links { -webkit-justify-content: center; justify-content: center; }
     .contact-list li { -webkit-justify-content: center; justify-content: center; text-align: left; }
     .footer-logo { -webkit-justify-content: center; justify-content: center; }
+    .footer-logo-img { height: 70px; }
 }
 
 /* =============================================
