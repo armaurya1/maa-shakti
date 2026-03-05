@@ -204,32 +204,25 @@ ul {
 }
 
 .logo {
-    display: flex;
+    display: -webkit-inline-flex;
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
-.logo i {
-    font-size: 45px;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: var(--primary-color);
+.logo-img {
+    height: 72px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,168,168,0.18));
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-.logo-text h1 {
-    font-size: 24px;
-    margin: 0;
-    line-height: 1;
-}
-
-.logo-text span {
-    font-size: 14px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.logo:hover .logo-img {
+    transform: scale(1.04);
+    filter: drop-shadow(0 4px 16px rgba(0,168,168,0.30));
 }
 
 .nav-links {
@@ -1863,7 +1856,6 @@ ul {
    ============================================= */
 
 /* Gradient text fallback */
-.logo i,
 .service-icon i {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
