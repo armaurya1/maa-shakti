@@ -4,23 +4,25 @@
 
 /* CSS Variables */
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary-color: #10b981;
-    --accent-color: #f59e0b;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --text-muted: #9ca3af;
-    --background-light: #f8fafc;
+    /* ── Logo-matched teal palette ── */
+    --primary-color: #0D9488;       /* teal-600  – main logo teal */
+    --primary-dark:  #0F766E;       /* teal-700  – darker hover/active */
+    --primary-light: #14B8A6;       /* teal-500  – subtle highlights */
+    --secondary-color: #0EA5E9;     /* sky-500   – friendly accent */
+    --accent-color: #F59E0B;        /* amber-500 – CTA warmth */
+    --text-dark: #134E4A;           /* teal-900  – rich dark text */
+    --text-light: #6B7280;
+    --text-muted: #9CA3AF;
+    --background-light: #F0FDFA;    /* teal-50   – page bg tint */
     --background-white: #ffffff;
-    --border-color: #e5e7eb;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-    --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --border-color: #CCFBF1;        /* teal-100  – soft borders */
+    --shadow-sm: 0 1px 2px rgba(13,148,136,0.07);
+    --shadow-md: 0 4px 6px -1px rgba(13,148,136,0.12);
+    --shadow-lg: 0 10px 15px -3px rgba(13,148,136,0.12);
+    --shadow-xl: 0 20px 25px -5px rgba(13,148,136,0.14);
+    --gradient-primary:   linear-gradient(135deg, #0D9488 0%, #0369A1 100%);
+    --gradient-secondary: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%);
+    --gradient-accent:    linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
@@ -533,7 +535,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.12), rgba(14, 165, 233, 0.12));
     border-radius: var(--border-radius-md);
 }
 
@@ -814,7 +816,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.12), rgba(14, 165, 233, 0.12));
     border-radius: var(--border-radius-full);
     transition: var(--transition-normal);
 }
@@ -1235,7 +1237,7 @@ ul {
 .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(37, 99, 235, 0.9);
+    background: rgba(13, 148, 136, 0.88);
     display: flex;
     flex-direction: column;
     align-items: center;
