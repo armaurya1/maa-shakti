@@ -2073,6 +2073,7 @@ a, button {
     .info-card:last-child { border-bottom: none; }
 
     /* ---- ABOUT ---- */
+    .about-image { display: none; }
     .about-features { grid-template-columns: 1fr; }
     .image-box.main-image { height: 280px; }
     .image-box.main-image i { font-size: 100px; }
